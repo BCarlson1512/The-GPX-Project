@@ -1,0 +1,106 @@
+html {
+    width: 60%;
+    height: 100%;
+    min-height: 100%;
+    margin: 0 auto;
+    font-size: 16px;
+    background-color: #FFFFFF;
+}
+body {
+    height: 100%;
+    min-height: 100%;
+    line-height: 1.75;
+    background-color: #FFFFFF;
+}
+a:link:hover {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    text-decoration: underline;
+    cursor: pointer;
+    cursor: hand;
+}
+input[type=submit], button {
+    cursor: pointer;
+    cursor: hand;
+}
+
+.vldtxt {
+    padding-top: 0.75vh;
+    padding-bottom: 0.75vh;
+    text-align: center;
+}
+
+.gpxHeader {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 25vh;
+}
+
+.blah{
+    text-align: center;
+}
+
+.dbStatus {
+    text-align: center;
+}
+
+.storeFilesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-bottom: 1vh;
+    padding-top: 1vh;
+}
+
+.clearDataContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-bottom: 1vh;
+    padding-top: 1vh;
+}
+
+.statusContainer {
+    display: flex;
+    justify-content: center;
+}
+
+tbody {
+display:block;
+height:150px;
+overflow-y: scroll;
+}
+thead, tbody tr {
+display:table;
+width:100%;
+table-layout:fixed;
+}
+thead {
+width: calc( 100% - 1em )
+}
+table {
+width:100%;
+}
+
+@media(max-width: 900px) {
+    html {
+        font-size: 14px !important;
+        width: 80% !important;
+    }
+}
+@media(max-width: 480px) {
+    html {
+        font-size: 12px !important;
+        width: 90% !important;
+    }
+}
+@media(max-width: 320px) {
+    html {
+        font-size: 12px !important;
+        width: 100% !important;
+    }
+}

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>GPX Project</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CHANGE ME">
+    <meta name="keywords" content="CHANGE ME">
+    <meta name="author" content="CHANGE ME">
+    <!-- Load jquery, bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <!-- Custom CSS End -->
+    <!-- Materialize -->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- End -->
+</head>
+
+<body>
+    <div class="animate__animated animate__fadeInUp headingContainer">
+        <div class="gpxHeader">
+            <h3>The Gpx Project.</h3>
+            <p class="animate__animated animate__fadeInUpBig">Created by: Ben Carlson</p>
+        </div>
+    </div>
+    <hr>
+    <div class="blah" id="blah">I am blah</div>
+    <hr>
+    <h5>Uploaded Files:</h5>
+    <div class="animate__animated animate__fadeIn highlight">
+        <table class="centered fileLog">
+            <thead>
+                <tr>
+                    <th>Filename</th>
+                    <th>Version</th>
+                    <th>Creator</th>
+                    <th>Waypoints</th>
+                    <th>Routes</th>
+                    <th>Tracks</th>
+                </tr>
+            </thead>
+            <tbody class="fileData">
+                <tr>
+                    <td>No Files Uploaded</td>
+                    <td>Use Form Below</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <form ref='uploadForm' id='uploadForm' action='/upload' method='post' encType="multipart/form-data">
+            <div class="form-group">
+                <input type="file" name="uploadFile" class="btn btn-secondary blue">
+                <input type='submit' value='Upload' class="btn btn-secondary blue">
+            </div>
+        </form>
+    </div>
+    <hr>
+    <span>
+        <p class="vldtxt">Don't see your file above? Make sure it is <b><a
+                    href="https://www.topografix.com/GPX/1/1/">valid</a></b></p>
+    </span>
+    <hr>
+    <div>
+        <h5>View GPX File</h5>
+        <div class="row">
+            <div class="input-field col s6">
+                <select class="fileAccess blue-text">
+                    <option value="" disabled selected>Choose your file</option>
+                </select>
+                <label>Choose a file</label>
+            </div>
+            <div class="input-field col s6">
+                <select class="gpxDataAccess blue-text">
+                    <option value="" disabled selected>Choose Component</option>
+                </select>
+                <label>View Additional Data</label>
+            </div>
+        </div>
+        <div>
+            <table id="docTable" class="highlight centered">
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Name</th>
+                        <th>Number of Points</th>
+                        <th>Length</th>
+                        <th>Loop</th>
+                    </tr>
+                </thead>
+                <tbody class="docData">
+                </tbody>
+            </table>
+        </div>
+        <div id="editGPX">
+            <h5>Edit GPX File</h5>
+            <div id="componentSelect" class="input-field col s12">
+                <select class="componentAccess blue-text">
+                    <option value="" disabled selected>Choose your component</option>
+                </select>
+                <label>Choose a component</label>
+            </div>
+            <div id="updateCompContainer">
+                <h6>Update Name</h6>
+                <form ref='updateComponentForm' id='updateComponentForm' action='/updateFile' method='post'
+                    encType="multipart/form-data">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <label for="nameBox">Name</label>
+                            <input type="text" class="form-control" name="name" id="nameBox" value="" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field ">
+                            <button class="btn waves-effect waves-light form-btn blue" type="submit"
+                                name="action">Update Component</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <h5>Create a Route</h5>
+            <form ref='createRouteForm' id='createRouteForm' action='/createRoute' mehtod='post'
+                enctype="multipart/form-data">
+                <div class="input-field col s6">
+                    <select class="createRteAccess blue-text" required>
+                        <option value="" disabled selected>Choose your file</option>
+                    </select>
+                    <label>Choose a file</label>
+                </div>
+                <div id="createRteInputs">
+                    <div id="rteInputTop" class="row rteInputTop">
+                        <div class="input-field col s6">
+                            <label for="rteNameBox">Name</label>
+                            <input type="text" class="form-control" id="rteNameBox" name="rteName" value="" required>
+                        </div>
+                        <div class="input-field col s6 numWpt">
+                            <label for="numWptBox">Number of Waypoints</label>
+                            <input type="number" class="form-control" id="numWptBox" name="numWpts" value="">
+                        </div>
+                    </div>
+                    <div class="wptEntry">
+                    </div>
+                    <div class="row">
+                        <div class="input-field ">
+                            <button class="btn waves-effect waves-light form-btn blue" type="submit"
+                                name="action">Create Route</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <h5>Create GPX File</h5>
+        <form ref='createGPXForm' id='createGPXForm' action='/createFile' method='post' encType="multipart/form-data">
+            <div class="row">
+                <div class="input-field col s6">
+                    <label for="creatorBox">Creator</label>
+                    <input type="text" class="form-control" id="creatorBox" name="creator" value="" required>
+                </div>
+                <div class="input-field col s6">
+                    <label for="fnBox">File Name</label>
+                    <input type="text" class="form-control" id="fnBox" name="fileName" value="" required>
+                </div>
+                <div class="input-field col s6">
+                    <button class="btn waves-effect waves-light form-btn blue" type="submit" name="action">Create
+                        File</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <hr>
+    <div>
+        <div>
+            <h5>Get Routes...</h5>
+            <div>
+                <div>
+                    <p>Between two points:</p>
+                    <form ref='searchRtePtsForm' id='searchRtePtsForm' action='/routesBetween' mehtod='get'
+                        enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <label for="startRteLatBox">Start Latitude</label>
+                                <input type="text" class="form-control" id="startRteLatBox" name="startRteLat" value="">
+                            </div>
+                            <div class="input-field col s6">
+                                <label for="startRteLonBox">Start Longitude</label>
+                                <input type="text" class="form-control" id="startRteLonBox" name="startRteLon" value="">
+                            </div>
+                            <div class="input-field col s6">
+                                <label for="endRteLatBox">End Latitude</label>
+                                <input type="text" class="form-control" id="endRteLatBox" name="endRteLat" value="">
+                            </div>
+                            <div class="input-field col s6">
+                                <label for="endRteLonBox">End Longitude</label>
+                                <input type="text" class="form-control" id="endRteLonBox" name="endRteLon" value="">
+                            </div>
+                            <div class="input-field col s6">
+                                <label for="rteDeltaBox">Delta</label>
+                                <input type="text" class="form-control" id="rteDeltaBox" name="rteDelta" value="">
+                            </div>
+                            <div class="input-field ">
+                                <button class="btn waves-effect waves-light form-btn blue" type="submit"
+                                    name="action">Find Routes</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div>
+                    <p id="rteLenPara">Of Length:</p>
+                    <form ref='searchRteLenForm' id='searchRteLenForm' action='/routesOfLen' mehtod='get'
+                        enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <label for="rteLenBox">Length</label>
+                                <input type="text" class="form-control" id="rteLenBox" name="rteLen" value="" required>
+                            </div>
+                            <div class="input-field col s6">
+                                <button class="btn waves-effect waves-light form-btn blue" type="submit"
+                                    name="action">Find Routes</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="rteTable">
+                    <table class="highlight centered">
+                        <thead>
+                            <tr>
+                                <th>File</th>
+                                <th>Name</th>
+                                <th>Number of Points</th>
+                                <th>Length</th>
+                                <th>Loop</th>
+                            </tr>
+                        </thead>
+                        <tbody class="rteData">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <div>
+            <h5>Get Tracks...</h5>
+            <div id="trkPtsForm">
+                <p>Between two points:</p>
+                <form ref='searchTrkPtsForm' id='searchTrkPtsForm' action='/tracksBetween' mehtod='get'
+                    enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <label for="startTrkLatBox">Start Latitude</label>
+                            <input type="text" class="form-control" id="startTrkLatBox" name="startTrkLat" value=""
+                                required>
+                        </div>
+                        <div class="input-field col s6">
+                            <label for="startTrkLonBox">Start Longitude</label>
+                            <input type="text" class="form-control" id="startTrkLonBox" name="startTrkLon" value=""
+                                required>
+                        </div>
+                        <div class="input-field col s6">
+                            <label for="endTrkLatBox">End Latitude</label>
+                            <input type="text" class="form-control" id="endTrkLatBox" name="endTrkLat" value=""
+                                required>
+                        </div>
+                        <div class="input-field col s6">
+                            <label for="endTrkLonBox">End Longitude</label>
+                            <input type="text" class="form-control" id="endTrkLonBox" name="endTrkLon" value=""
+                                required>
+                        </div>
+                        <div class="input-field col s6">
+                            <label for="trkDeltaBox">Delta</label>
+                            <input type="text" class="form-control" id="trkDeltaBox" name="trkDelta" value="" required>
+                        </div>
+                        <div class="input-field ">
+                            <button class="btn waves-effect waves-light form-btn blue" type="submit" name="action">Find
+                                Tracks</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="trkLenForm">
+                <p id="trkLenPara">Of Length:</p>
+                <form ref='searchTrkLenForm' id='searchTrkLenForm' action='/tracksOfLen' mehtod='get'
+                    enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <label for="trkLenBox">Length</label>
+                            <input type="text" class="form-control" id="trkLenBox" name="trkLen" value="" required>
+                        </div>
+                        <div class="input-field col s6">
+                            <button class="btn waves-effect waves-light form-btn blue" type="submit" name="action">Find
+                                Tracks</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="trkTable">
+                <table class="highlight centered">
+                    <thead>
+                        <tr>
+                            <th>File</th>
+                            <th>Name</th>
+                            <th>Number of Points</th>
+                            <th>Length</th>
+                            <th>Loop</th>
+                        </tr>
+                    </thead>
+                    <tbody class="trkData">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="animate__animated animate__fadeInLeft headingContainer">
+        <div class="gpxHeader">
+            <h3>Gpx Database</h3>
+        </div>
+        <div class="statusContainer">
+            <button id="dbStatus" class="btn waves-effect waves-light form-btn blue">Database Status</button>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <div class="loginContainer">
+            <h5>Sign in</h5>
+            <form ref='userLoginForm' id='userLoginForm' action='/login' method='post' encType="multipart/form-data">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="userNameBox">User Name</label>
+                        <input type="text" class="form-control" id="userNameBox" name="userName" value="" required>
+                    </div>
+                    <div class="input-field col s6">
+                        <label for="passwordBox">Password</label>
+                        <input type="password" class="form-control" id="passwordBox" name="password" value="" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="hostBox">Host</label>
+                        <input type="text" class="form-control" id="hostBox" name="hostName" value="" required>
+                    </div>
+                    <div class="input-field col s6">
+                        <label for="dbBox">Database</label>
+                        <input type="text" class="form-control" id="dbBox" name="dbName" value="" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <button class="btn waves-effect waves-light form-btn blue" type="submit"
+                            name="action">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="loggedInContainer" class="loggedInContainer">
+            <div class="storeFilesContainer">
+                <h6>Store All Files</h6>
+                <button id="storeFilesBtn" class="btn waves-effect waves-light form-btn blue">Store Files</button>
+            </div>
+            <div class="clearDataContainer">
+                <h6>Clear Database Tables</h6>
+                <button id="clearDbBtn" class="btn waves-effect waves-light form-btn blue">Clear Tables</button>
+            </div>
+            <div class="queryContainer">
+                <h5>Search Your Database</h5>
+                <div class="input-field col s6">
+                    <select class="querySelect blue-text">
+                        <option value="" disabled selected>Type of Query</option>
+                        <optgroup label="Routes"></optgroup>
+                        <option value="AllRte">All Routes</option>
+                        <option value="SpecificRte">Routes from Specified File</option>
+                        <option value="NShortRte">Top Shortest Routes</option>
+                        <option value="NLongRte">Top Longest Routes</option>
+                        <optgroup label="Points"></optgroup>
+                        <option value="SpecificPts">Points From Specific Route</option>
+                        <option value="FilePts">Points From Specific File</option>
+                    </select>
+                    <select id="sortSelect" class="sortSelect blue-text">
+                        <option value="" disabled selected>Sort By</option>
+                        <option value="RteLen">Route Length</option>
+                        <option value="RteNam">Route Name</option>
+                    </select>
+                    <label>Choose your Query</label>
+                    <div class="queryFormContainer">
+                        <form ref='queryForm' id='queryForm' action='/queryDB' method='post'
+                            encType="multipart/form-data">
+                            <div class="row">
+                                <div id="queryFileName" class="input-field col s6">
+                                    <label for="fileNameBox">File Name</label>
+                                    <input type="text" class="form-control" id="fileNameBox" name="fileName" value="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div id="queryCount" class="input-field col s6">
+                                    <label for="routeCountBox">Number of Routes</label>
+                                    <input type="number" class="form-control" id="routeCountBox" name="routeCount"
+                                        value="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div id="queryRouteName" class="input-field col s6">
+                                    <label for="routeNameBox">Route Name</label>
+                                    <input type="text" class="form-control" id="routeNameBox" name="routeName" value="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <button class="btn waves-effect waves-light form-btn blue" type="submit"
+                                        name="action">Submit Query</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <p>Routes</p>
+                <div id="rteDbTable">
+                    <table class="highlight centered">
+                        <thead>
+                            <tr>
+                                <th>File</th>
+                                <th>Name</th>
+                                <th>Length</th>
+                            </tr>
+                        </thead>
+                        <tbody class="rteDbData">
+                        </tbody>
+                    </table>
+                </div>
+                <p>Points</p>
+                <div id="wptDbTable">
+                    <table class="highlight centered">
+                        <thead>
+                            <tr>
+                                <th>Route</th>
+                                <th>Index</th>
+                                <th>Name</th>
+                                <th>Lat</th>
+                                <th>Lon</th>
+                            </tr>
+                        </thead>
+                        <tbody class="wptDbData">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Leave me at the bottom of body -->
+    <script src="/index.js"></script>
+</body>
+
+</html>
