@@ -9,3 +9,4 @@ Node.js/Express Backend
 Html/CSS/Materialize Frontend
 JQuery
 LibXML2
+MariaDB for database
