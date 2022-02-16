@@ -8,3 +8,4 @@ Node.ffi -> Bridges C to Js
 Node.js/Express Backend
 Html/CSS/Materialize Frontend
 JQuery
+LibXML2
