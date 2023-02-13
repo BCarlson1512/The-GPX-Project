@@ -15,6 +15,6 @@
     "http": "0.0.1-security",
     "javascript-obfuscator": "^2.6.1",
     "mysql2": "^2.2.5",
-    "nodemon": "^2.0.5"
+    "nodemon": "^2.0.20"
   }
 }
